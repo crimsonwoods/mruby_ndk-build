@@ -7,6 +7,7 @@ YSRC        := $(RUBY_ROOT)/src/parse.y
 DLIB        := $(RUBY_ROOT)/mrblib/mrblib.ctmp
 RLIB        := $(RUBY_ROOT)/mrblib/mrblib.rbtmp
 MRBS        := $(RUBY_ROOT)/mrblib/*.rb
+EXCLUDES    := $(RUBY_ROOT)/src/minimain.c
 
 include $(CLEAR_VARS)
 
@@ -26,7 +27,7 @@ include $(CLEAR_VARS)
 LOCAL_MODULE           := mruby_lib
 LOCAL_CFLAGS           := $(BASE_CFLAGS)
 LOCAL_C_INCLUDES       := $(RUBY_ROOT)/include $(RUBY_ROOT)/src
-LOCAL_SRC_FILES        := $(wildcard $(RUBY_ROOT)/src/*.c)
+LOCAL_SRC_FILES        := $(filter-out $(EXCLUDES),$(wildcard $(RUBY_ROOT)/src/*.c))
 LOCAL_LDLIBS           :=
 LOCAL_SHARED_LIBRARIES :=
 
